@@ -1,7 +1,8 @@
 {
    "name": "toys-api-service",
    "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
+   "description": "Toys API Service",
+   "main": "dist/index.js",
    "devDependencies": {
       "@types/console-stamp": "^0.2.32",
       "@types/cors": "^2.8.6",
@@ -31,6 +32,6 @@
       "typeorm": "0.2.21"
    },
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "start": "nodemon ./dist/index.js"
    }
 }
