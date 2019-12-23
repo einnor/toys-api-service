@@ -103,6 +103,32 @@ export class Toys {
     return record;
   }
 
+  public static async update(id: string, { brandId, categoryId, model, description, price, imageUrl }): Promise<Details | undefined> {
+
+    const toy = await this.getOne({ id });
+    if (!toy) {
+      return;
+    }
+
+    const brand = await Brands.getOne({ id: brandId });
+    const category = await Categories.getOne({ id: categoryId });
+
+    if (!brand || !category) {
+      return;
+    }
+
+    toy.brand = brand;
+    toy.category = category;
+    toy.model = model;
+    toy.description = description;
+    toy.price = price;
+    toy.imageUrl = imageUrl;
+
+    const record = await Entities.save(Toy, toy);
+
+    return record;
+  }
+
   public static async remove({ id }): Promise<Details | undefined> {
 
     const toy = await this.getOne({ id });

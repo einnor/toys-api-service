@@ -81,6 +81,30 @@ export class ToyController {
   };
 
   /**
+   * PUT
+   * Update a toy and return the result object
+   *
+   * @param request
+   * @param response
+   */
+  public static async update (request: Request, response: Response) {
+    const { id } = request.params;
+    const { brandId, categoryId, model, description, price, imageUrl } = request.body;
+
+    try {
+      const toy: Details | undefined = await Toys.update(id, { brandId, categoryId, model, description, price, imageUrl });
+
+      if (!toy) {
+        return Api.notFound(request, response, 'Records not found');
+      }
+
+      return Api.success(response, toy);
+    } catch (error) {
+      return Api.internalError(request, response, error);
+    }
+  };
+
+  /**
    * DELETE
    * Remove a toy by id
    *

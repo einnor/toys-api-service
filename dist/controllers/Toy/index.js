@@ -48,6 +48,21 @@ class ToyController {
         }
     }
     ;
+    static async update(request, response) {
+        const { id } = request.params;
+        const { brandId, categoryId, model, description, price, imageUrl } = request.body;
+        try {
+            const toy = await Toys_1.Toys.update(id, { brandId, categoryId, model, description, price, imageUrl });
+            if (!toy) {
+                return Api_1.Api.notFound(request, response, 'Records not found');
+            }
+            return Api_1.Api.success(response, toy);
+        }
+        catch (error) {
+            return Api_1.Api.internalError(request, response, error);
+        }
+    }
+    ;
     static async remove(request, response) {
         const { id } = request.params;
         try {

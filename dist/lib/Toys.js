@@ -48,6 +48,25 @@ class Toys {
         const record = await Entities_1.Entities.save(Toy_1.Toy, toy);
         return record;
     }
+    static async update(id, { brandId, categoryId, model, description, price, imageUrl }) {
+        const toy = await this.getOne({ id });
+        if (!toy) {
+            return;
+        }
+        const brand = await Brands_1.Brands.getOne({ id: brandId });
+        const category = await Categories_1.Categories.getOne({ id: categoryId });
+        if (!brand || !category) {
+            return;
+        }
+        toy.brand = brand;
+        toy.category = category;
+        toy.model = model;
+        toy.description = description;
+        toy.price = price;
+        toy.imageUrl = imageUrl;
+        const record = await Entities_1.Entities.save(Toy_1.Toy, toy);
+        return record;
+    }
     static async remove({ id }) {
         const toy = await this.getOne({ id });
         if (!toy) {

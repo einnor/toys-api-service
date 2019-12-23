@@ -24,9 +24,15 @@ exports.routes = [
     },
     {
         path: '/api/v1/toys/:id',
+        method: 'put',
+        action: Toy_1.ToyController.update,
+        validate: Toys_1.Toys.validators.save,
+        cache: false,
+    },
+    {
+        path: '/api/v1/toys/:id',
         method: 'delete',
         action: Toy_1.ToyController.remove,
-        validate: Toys_1.Toys.validators.save,
         cache: false,
     },
 ];
