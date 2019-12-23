@@ -11,4 +11,6 @@ const Api = __importStar(require("./api"));
 exports.Api = Api;
 const Brands = __importStar(require("./brands"));
 exports.Brands = Brands;
+const Categories = __importStar(require("./categories"));
+exports.Categories = Categories;
 //# sourceMappingURL=index.js.map
