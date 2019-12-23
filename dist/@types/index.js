@@ -13,4 +13,6 @@ const Brands = __importStar(require("./brands"));
 exports.Brands = Brands;
 const Categories = __importStar(require("./categories"));
 exports.Categories = Categories;
+const Toys = __importStar(require("./toys"));
+exports.Toys = Toys;
 //# sourceMappingURL=index.js.map
