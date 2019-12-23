@@ -5,5 +5,6 @@ export { PaginationOptions } from './PaginationOptions';
 export { PagedResponse } from './PagedResponse';
 export { Response } from './Response';
 export { Request } from './Request';
+export { NextFunction } from './NextFunction';
 export { Filter } from './Filter';
 export { Route } from './Route';

@@ -15,7 +15,7 @@ const DEFAULT_OFFSET = 0;
  * @param response
  * @param next
  */
-export default function parseRequest(request: Request, response: Response, next: NextFunction): any {
+export function parseRequest(request: Request, response: Response, next: NextFunction): any {
   // If it's not a GET request, then none of these
   // request options are relevant.
   if (request.method.toLowerCase() === 'get') {
