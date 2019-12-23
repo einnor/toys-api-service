@@ -17,7 +17,17 @@ class Brands {
         };
         return pagedListing;
     }
+    static async getOne(conditions) {
+        const record = await typeorm_1.getManager().getRepository(Brand_1.Brand).findOne({
+            where: Object.assign({}, conditions)
+        });
+        return record;
+    }
     static async save({ name }) {
+        const exists = await this.getOne({ name });
+        if (exists) {
+            return;
+        }
         const brand = new Brand_1.Brand();
         brand.name = name;
         const record = await typeorm_1.getManager().getRepository(Brand_1.Brand).save(brand);

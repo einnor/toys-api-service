@@ -41,7 +41,19 @@ export class Brands {
     return pagedListing;
   }
 
-  public static async save({ name }: { name: string}): Promise<Details> {
+  public static async getOne(conditions: object): Promise<Details | undefined> {
+    const record = await getManager().getRepository(Brand).findOne({
+      where: { ...conditions }
+    });
+    return record;
+  }
+
+  public static async save({ name }: { name: string}): Promise<Details | undefined> {
+
+    const exists = await this.getOne({ name });
+    if (exists) {
+      return;
+    }
 
     const brand = new Brand();
     brand.name = name;
