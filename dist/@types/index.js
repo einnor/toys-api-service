@@ -9,4 +9,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Api = __importStar(require("./api"));
 exports.Api = Api;
+const Brands = __importStar(require("./brands"));
+exports.Brands = Brands;
 //# sourceMappingURL=index.js.map
