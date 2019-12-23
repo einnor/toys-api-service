@@ -1,8 +1,10 @@
+import { Brands, Categories } from '..';
+
 export type Details = {
   id: string;
-  brand: string;
+  brand: Brands.Details;
   model: string;
-  category: string;
+  category: Categories.Details;
   description: string;
   price: number;
   imageUrl: string;

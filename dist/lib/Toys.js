@@ -12,37 +12,23 @@ class Toys {
         let query = queryBuilder
             .orderBy(`toy.${sortColumn}`, sortOrder);
         query = query.skip(offset).take(perPage);
+        query = query.leftJoinAndSelect('toy.brand', 'brand');
+        query = query.leftJoinAndSelect('toy.category', 'category');
         const [results, totalResults] = await query.getManyAndCount();
         const pagedListing = {
             total: totalResults,
-            pageData: this.transform(results),
+            pageData: results,
         };
         return pagedListing;
-    }
-    static transform(results) {
-        return results.map((toy) => ({
-            id: toy.id,
-            brand: toy.brand.name,
-            model: toy.model,
-            category: toy.category.name,
-            description: toy.description,
-            price: toy.price,
-            imageUrl: toy.imageUrl,
-            createdAt: toy.createdAt,
-            updatedAt: toy.updatedAt,
-        }));
     }
     static async getOne(conditions) {
         const record = await typeorm_1.getManager().getRepository(Toy_1.Toy).findOne({
             where: Object.assign({}, conditions)
         });
-        if (!record) {
-            return;
-        }
-        return this.transform([record])[0];
+        return record;
     }
     static async save({ brandId, categoryId, model, description, price, imageUrl }) {
-        const exists = await this.getOne({ name });
+        const exists = await this.getOne({ brandId, categoryId, model });
         if (exists) {
             return;
         }
@@ -59,15 +45,23 @@ class Toys {
         toy.price = price;
         toy.imageUrl = imageUrl;
         const record = await typeorm_1.getManager().getRepository(Toy_1.Toy).save(toy);
-        return this.transform([record])[0];
+        return record;
     }
 }
 Toys.validators = {
     save: [
-        express_validator_1.check('name', 'Invalid brand name').isLength({
+        express_validator_1.check('brandId', 'Invalid brand id').isUUID(),
+        express_validator_1.check('categoryId', 'Invalid category id').isUUID(),
+        express_validator_1.check('model', 'Invalid model').isLength({
             min: 2,
             max: 50,
         }),
+        express_validator_1.check('description', 'Invalid description').isLength({
+            min: 10,
+            max: 1000,
+        }),
+        express_validator_1.check('price', 'Invalid price').isNumeric(),
+        express_validator_1.check('imageUrl', 'Invalid image url').isURL(),
     ],
 };
 exports.Toys = Toys;

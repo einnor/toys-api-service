@@ -10,11 +10,29 @@ export class Toys {
 
   public static validators = {
     save: [
-      // Name
-      check('name', 'Invalid brand name').isLength({
+      // BrandId
+      check('brandId', 'Invalid brand id').isUUID(),
+
+      // CategoryId
+      check('categoryId', 'Invalid category id').isUUID(),
+
+      // Model
+      check('model', 'Invalid model').isLength({
         min: 2,
         max: 50,
       }),
+
+      // Description
+      check('description', 'Invalid description').isLength({
+        min: 10,
+        max: 1000,
+      }),
+
+      // Price
+      check('price', 'Invalid price').isNumeric(),
+
+      // ImageUrl
+      check('imageUrl', 'Invalid image url').isURL(),
     ],
   };
 
@@ -32,29 +50,21 @@ export class Toys {
     // Lastly, set the pagination conditions
     query = query.skip(offset).take(perPage);
 
+    // Join brand
+    query = query.leftJoinAndSelect('toy.brand', 'brand')
+
+    // Join category
+    query = query.leftJoinAndSelect('toy.category', 'category')
+
     // Get the results
     const [results, totalResults] = await query.getManyAndCount();
 
     const pagedListing: Listing = {
       total: totalResults,
-      pageData: this.transform(results),
+      pageData: results,
     };
 
     return pagedListing;
-  }
-
-  public static transform(results: Toy[]) {
-    return results.map((toy) => ({
-      id: toy.id,
-      brand: toy.brand.name,
-      model: toy.model,
-      category: toy.category.name,
-      description: toy.description,
-      price: toy.price,
-      imageUrl: toy.imageUrl,
-      createdAt: toy.createdAt,
-      updatedAt: toy.updatedAt,
-    }));
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
@@ -62,16 +72,12 @@ export class Toys {
       where: { ...conditions }
     });
 
-    if (!record) {
-      return;
-    }
-
-    return this.transform([record])[0];
+    return record;
   }
 
   public static async save({ brandId, categoryId, model, description, price, imageUrl }): Promise<Details | undefined> {
 
-    const exists = await this.getOne({ name });
+    const exists = await this.getOne({ brandId, categoryId, model });
     if (exists) {
       return;
     }
@@ -93,6 +99,6 @@ export class Toys {
 
    const record = await getManager().getRepository(Toy).save<Toy>(toy);
 
-    return this.transform([record])[0];
+    return record;
   }
 }
