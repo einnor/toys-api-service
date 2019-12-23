@@ -1,10 +1,9 @@
-// Import module routes here
+import { routes as Brands } from './Brands';
 
 import { Route } from '../@types/api';
 
-// Apply routes here
-
-/**
- * All routes combined
- */
+// All routes combined
 export const Routes: Route[] = [];
+
+// Apply routes here
+Routes.push.apply(Routes, Brands);

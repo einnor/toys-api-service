@@ -1,7 +1,7 @@
-import { Brands } from '../lib/Brands';
-import { Api } from '../lib/Api';
-import { Request, Response } from '../@types/api';
-import { Listing } from '../@types/brands';
+import { Brands } from '../../lib/Brands';
+import { Api } from '../../lib/Api';
+import { Request, Response } from '../../@types/api';
+import { Listing } from '../../@types/brands';
 
 export class BrandController {
     /**
