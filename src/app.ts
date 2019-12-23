@@ -4,6 +4,8 @@ import consoleStamp from 'console-stamp';
 import cors from 'cors';
 import helmet from 'helmet';
 import 'reflect-metadata';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 import { checkCache } from './middlewares/CheckCache';
 import { checkValidationResult } from './middlewares/ValidateInput';
@@ -45,6 +47,35 @@ if (process.env.NODE_ENV !== 'production') {
   loggingOptions.push('query');
 }
 
+// Swagger set up
+const options = {
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Toys API Service',
+      version: '1.0.0',
+      description:
+        'Documentation for the Toys API Service',
+      license: {
+        name: 'MIT',
+        url: 'https://choosealicense.com/licenses/mit/'
+      },
+      contact: {
+        name: 'Swagger',
+        url: 'https://swagger.io',
+        email: 'ronnienyaga@gmail.com'
+      }
+    },
+    servers: [
+      {
+        url: "http://localhost:8080/api/v1"
+      }
+    ]
+  },
+  apis: []
+};
+const specs = swaggerJsdoc(options);
+
 // Establish the database connections,
 // then initialize the API...
 export const app = async () =>
@@ -64,6 +95,10 @@ export const app = async () =>
 
       // Configure response headers
       router.use(helmet());
+
+      // API Dpc route
+      router.use('/api/v1/api-doc', swaggerUi.serve);
+      router.get('/api/v1/api-doc', swaggerUi.setup(specs, { explorer: true }));
 
       // Register all application routes
       Routes.forEach((route) => {
