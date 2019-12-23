@@ -102,4 +102,16 @@ export class Toys {
 
     return record;
   }
+
+  public static async remove({ id }): Promise<Details | undefined> {
+
+    const toy = await this.getOne({ id });
+    if (!toy) {
+      return;
+    }
+
+    await Entities.remove(Toy, toy);
+
+    return toy;
+  }
 }

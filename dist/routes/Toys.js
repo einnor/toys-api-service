@@ -22,5 +22,12 @@ exports.routes = [
         validate: Toys_1.Toys.validators.save,
         cache: false,
     },
+    {
+        path: '/api/v1/toys/:id',
+        method: 'delete',
+        action: Toy_1.ToyController.remove,
+        validate: Toys_1.Toys.validators.save,
+        cache: false,
+    },
 ];
 //# sourceMappingURL=Toys.js.map

@@ -79,4 +79,27 @@ export class ToyController {
       return Api.internalError(request, response, error);
     }
   };
+
+  /**
+   * DELETE
+   * Remove a toy by id
+   *
+   * @param request
+   * @param response
+   */
+  public static async remove (request: Request, response: Response) {
+    const { id } = request.params;
+
+    try {
+      const toy: Details | undefined = await Toys.remove({ id });
+
+      if (!toy) {
+        return Api.notFound(request, response, 'Records not found');
+      }
+
+      return Api.success(response, toy);
+    } catch (error) {
+      return Api.internalError(request, response, error);
+    }
+  };
 }

@@ -48,6 +48,14 @@ class Toys {
         const record = await Entities_1.Entities.save(Toy_1.Toy, toy);
         return record;
     }
+    static async remove({ id }) {
+        const toy = await this.getOne({ id });
+        if (!toy) {
+            return;
+        }
+        await Entities_1.Entities.remove(Toy_1.Toy, toy);
+        return toy;
+    }
 }
 Toys.validators = {
     save: [

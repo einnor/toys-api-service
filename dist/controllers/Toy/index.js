@@ -48,6 +48,20 @@ class ToyController {
         }
     }
     ;
+    static async remove(request, response) {
+        const { id } = request.params;
+        try {
+            const toy = await Toys_1.Toys.remove({ id });
+            if (!toy) {
+                return Api_1.Api.notFound(request, response, 'Records not found');
+            }
+            return Api_1.Api.success(response, toy);
+        }
+        catch (error) {
+            return Api_1.Api.internalError(request, response, error);
+        }
+    }
+    ;
 }
 exports.ToyController = ToyController;
 //# sourceMappingURL=index.js.map

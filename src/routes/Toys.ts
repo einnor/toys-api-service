@@ -22,4 +22,11 @@ export const routes: Route[] = [
     validate: Toys.validators.save,
     cache: false,
   },
+  {
+    path: '/api/v1/toys/:id',
+    method: 'delete',
+    action: Controller.remove,
+    validate: Toys.validators.save,
+    cache: false,
+  },
 ];
