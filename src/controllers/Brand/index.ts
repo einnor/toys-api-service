@@ -1,17 +1,17 @@
 import { Brands } from '../../lib/Brands';
 import { Api } from '../../lib/Api';
 import { Request, Response } from '../../@types/api';
-import { Listing } from '../../@types/brands';
+import { Listing, Details } from '../../@types/brands';
 
 export class BrandController {
-    /**
+  /**
    * GET
    * Retrieve a list of Brands formatted specifically for the frontend.
    *
    * @param request
    * @param response
    */
-  public static async getBrandListing (request: Request, response: Response) {
+  public static async getListing (request: Request, response: Response) {
     // Pagination options
     const { perPage, offset } = request.pagination;
 
@@ -28,6 +28,25 @@ export class BrandController {
       });
 
       return Api.success(response, listing);
+    } catch (error) {
+      return Api.internalError(request, response, error);
+    }
+  };
+
+  /**
+   * GET
+   * Retrieve a list of Brands formatted specifically for the frontend.
+   *
+   * @param request
+   * @param response
+   */
+  public static async save (request: Request, response: Response) {
+    const { name } = request.body;
+
+    try {
+      const brand: Details = await Brands.save({ name });
+
+      return Api.success(response, brand);
     } catch (error) {
       return Api.internalError(request, response, error);
     }
