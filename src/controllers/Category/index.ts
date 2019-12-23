@@ -1,12 +1,12 @@
-import { Brands } from '../../lib/Brands';
+import { Categories } from '../../lib/Categories';
 import { Api } from '../../lib/Api';
 import { Request, Response } from '../../@types/api';
-import { Listing, Details } from '../../@types/brands';
+import { Listing, Details } from '../../@types/categories';
 
-export class BrandController {
+export class CategoryController {
   /**
    * GET
-   * Retrieve a list of Brands formatted specifically for the frontend.
+   * Retrieve a list of Categories formatted specifically for the frontend.
    *
    * @param request
    * @param response
@@ -19,8 +19,8 @@ export class BrandController {
     const { sortField, sortOrder } =  request.sorting;
 
     try {
-      // Get Brands from the database, paginated/filtered/sorted
-      const listing: Listing = await Brands.getListing({
+      // Get categories from the database, paginated/filtered/sorted
+      const listing: Listing = await Categories.getListing({
         perPage,
         offset,
         sortField,
@@ -35,7 +35,7 @@ export class BrandController {
 
   /**
    * POST
-   * Save a brand and return the result object
+   * Save a category and return the result object
    *
    * @param request
    * @param response
@@ -44,9 +44,9 @@ export class BrandController {
     const { name } = request.body;
 
     try {
-      const brand: Details | undefined = await Brands.save({ name });
+      const category: Details | undefined = await Categories.save({ name });
 
-      return Api.success(response, brand);
+      return Api.success(response, category);
     } catch (error) {
       return Api.internalError(request, response, error);
     }
