@@ -9,11 +9,11 @@ export const routes: Route[] = [
     action: Controller.getListing,
     cache: true,
   },
-  // {
-  //   path: '/api/v1/toys',
-  //   method: 'post',
-  //   action: Controller.save,
-  //   validate: Toys.validators.save,
-  //   cache: false,
-  // },
+  {
+    path: '/api/v1/toys',
+    method: 'post',
+    action: Controller.save,
+    validate: Toys.validators.save,
+    cache: false,
+  },
 ];

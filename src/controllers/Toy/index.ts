@@ -33,22 +33,22 @@ export class ToyController {
     }
   };
 
-  // /**
-  //  * POST
-  //  * Save a toy and return the result object
-  //  *
-  //  * @param request
-  //  * @param response
-  //  */
-  // public static async save (request: Request, response: Response) {
-  //   const { name } = request.body;
+  /**
+   * POST
+   * Save a toy and return the result object
+   *
+   * @param request
+   * @param response
+   */
+  public static async save (request: Request, response: Response) {
+    const { brandId, categoryId, model, description, price, imageUrl } = request.body;
 
-  //   try {
-  //     const brand: Details | undefined = await Toys.save({ name });
+    try {
+      const brand: Details | undefined = await Toys.save({ brandId, categoryId, model, description, price, imageUrl });
 
-  //     return Api.success(response, brand);
-  //   } catch (error) {
-  //     return Api.internalError(request, response, error);
-  //   }
-  // };
+      return Api.success(response, brand);
+    } catch (error) {
+      return Api.internalError(request, response, error);
+    }
+  };
 }

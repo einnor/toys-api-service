@@ -20,6 +20,17 @@ class ToyController {
         }
     }
     ;
+    static async save(request, response) {
+        const { brandId, categoryId, model, description, price, imageUrl } = request.body;
+        try {
+            const brand = await Toys_1.Toys.save({ brandId, categoryId, model, description, price, imageUrl });
+            return Api_1.Api.success(response, brand);
+        }
+        catch (error) {
+            return Api_1.Api.internalError(request, response, error);
+        }
+    }
+    ;
 }
 exports.ToyController = ToyController;
 //# sourceMappingURL=index.js.map
