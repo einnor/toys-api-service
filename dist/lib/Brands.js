@@ -19,7 +19,7 @@ class Brands {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await Entities_1.Entities.getOne(Brand_1.Brand.toString(), {
+        const record = await Entities_1.Entities.getOne(Brand_1.Brand, {
             where: Object.assign({}, conditions)
         });
         return record;
@@ -31,7 +31,7 @@ class Brands {
         }
         const brand = new Brand_1.Brand();
         brand.name = name;
-        const record = await Entities_1.Entities.save(Brand_1.Brand.toString(), brand);
+        const record = await Entities_1.Entities.save(Brand_1.Brand, brand);
         return record;
     }
 }

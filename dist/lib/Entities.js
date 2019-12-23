@@ -12,16 +12,16 @@ class Entities {
         return typeorm_1.getManager().find(entityName, conditions);
     }
     static async getOne(entityName, conditions) {
-        const repo = typeorm_1.getManager().getRepository(entityName.toString());
+        const repo = typeorm_1.getManager().getRepository(entityName);
         const item = repo.findOne(conditions);
         return item;
     }
     static async remove(entityName, item) {
-        const repo = typeorm_1.getManager().getRepository(entityName.toString());
+        const repo = typeorm_1.getManager().getRepository(entityName);
         return repo.remove(item);
     }
     static async save(entityName, entity, options) {
-        const repo = typeorm_1.getManager().getRepository(entityName.toString());
+        const repo = typeorm_1.getManager().getRepository(entityName);
         return repo.save(entity, options);
     }
     static async getAndCount(entityName, conditions) {

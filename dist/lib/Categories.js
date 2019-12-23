@@ -19,7 +19,7 @@ class Categories {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await Entities_1.Entities.getOne(Category_1.Category.toString(), {
+        const record = await Entities_1.Entities.getOne(Category_1.Category, {
             where: Object.assign({}, conditions)
         });
         return record;
@@ -32,7 +32,7 @@ class Categories {
         }
         const category = new Category_1.Category();
         category.name = name;
-        const record = await Entities_1.Entities.save(Category_1.Category.toString(), category);
+        const record = await Entities_1.Entities.save(Category_1.Category, category);
         return record;
     }
 }

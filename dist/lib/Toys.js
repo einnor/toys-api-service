@@ -23,7 +23,7 @@ class Toys {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await Entities_1.Entities.getOne(Toy_1.Toy.toString(), {
+        const record = await Entities_1.Entities.getOne(Toy_1.Toy, {
             where: Object.assign({}, conditions)
         });
         return record;
@@ -45,7 +45,7 @@ class Toys {
         toy.description = description;
         toy.price = price;
         toy.imageUrl = imageUrl;
-        const record = await Entities_1.Entities.save(Toy_1.Toy.toString(), toy);
+        const record = await Entities_1.Entities.save(Toy_1.Toy, toy);
         return record;
     }
 }

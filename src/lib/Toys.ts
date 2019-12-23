@@ -69,7 +69,7 @@ export class Toys {
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
-    const record: Details | undefined = await Entities.getOne(Toy.toString(), {
+    const record: Details | undefined = await Entities.getOne(Toy, {
       where: { ...conditions }
     });
 
@@ -98,7 +98,7 @@ export class Toys {
     toy.price = price;
     toy.imageUrl = imageUrl;
 
-    const record = await Entities.save(Toy.toString(), toy);
+    const record = await Entities.save(Toy, toy);
 
     return record;
   }
