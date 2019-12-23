@@ -22,6 +22,16 @@ __decorate([
     __metadata("design:type", String)
 ], Brand.prototype, "name", void 0);
 __decorate([
+    typeorm_1.CreateDateColumn({
+        readonly: true
+    }),
+    __metadata("design:type", Date)
+], Brand.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", Date)
+], Brand.prototype, "updatedAt", void 0);
+__decorate([
     typeorm_1.OneToMany(type => Toy_1.Toy, toy => toy.brand),
     __metadata("design:type", Array)
 ], Brand.prototype, "toys", void 0);

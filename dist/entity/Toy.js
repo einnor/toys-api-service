@@ -50,6 +50,16 @@ __decorate([
     __metadata("design:type", String)
 ], Toy.prototype, "imageUrl", void 0);
 __decorate([
+    typeorm_1.CreateDateColumn({
+        readonly: true
+    }),
+    __metadata("design:type", Date)
+], Toy.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", Date)
+], Toy.prototype, "updatedAt", void 0);
+__decorate([
     typeorm_1.AfterLoad(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

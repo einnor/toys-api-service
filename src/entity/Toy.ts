@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, AfterLoad } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, AfterLoad } from 'typeorm';
 import { Numbers } from '../lib/Numbers';
 import { Brand } from './Brand';
 import { Category } from './Category';
@@ -29,6 +29,14 @@ export class Toy {
 
   @Column()
   imageUrl: string;
+
+  @CreateDateColumn({
+    readonly: true
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @AfterLoad() _convertDecimals()
   {
