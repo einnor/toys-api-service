@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const express_validator_1 = require("express-validator");
 const Category_1 = require("../entity/Category");
+const Entities_1 = require("./Entities");
 class Categories {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
         const sortColumn = sortField ? sortField : 'createdAt';
@@ -18,7 +19,7 @@ class Categories {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await typeorm_1.getManager().getRepository(Category_1.Category).findOne({
+        const record = await Entities_1.Entities.getOne(Category_1.Category.toString(), {
             where: Object.assign({}, conditions)
         });
         return record;

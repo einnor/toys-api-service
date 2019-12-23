@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import { Category } from '../entity/Category';
 import { Listing, Details } from '../@types/categories';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
+import { Entities } from './Entities';
 
 export class Categories {
 
@@ -42,9 +43,10 @@ export class Categories {
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
-    const record = await getManager().getRepository(Category).findOne({
+    const record: Details | undefined = await Entities.getOne(Category.toString(), {
       where: { ...conditions }
     });
+
     return record;
   }
 

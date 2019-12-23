@@ -5,6 +5,7 @@ const express_validator_1 = require("express-validator");
 const Toy_1 = require("../entity/Toy");
 const Brands_1 = require("./Brands");
 const Categories_1 = require("./Categories");
+const Entities_1 = require("./Entities");
 class Toys {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
         const sortColumn = sortField ? sortField : 'createdAt';
@@ -22,7 +23,7 @@ class Toys {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await typeorm_1.getManager().getRepository(Toy_1.Toy).findOne({
+        const record = await Entities_1.Entities.getOne(Toy_1.Toy.toString(), {
             where: Object.assign({}, conditions)
         });
         return record;

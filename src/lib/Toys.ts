@@ -5,6 +5,7 @@ import { Listing, Details } from '../@types/toys';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
 import { Brands } from './Brands';
 import { Categories } from './Categories';
+import { Entities } from './Entities';
 
 export class Toys {
 
@@ -68,7 +69,7 @@ export class Toys {
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
-    const record = await getManager().getRepository(Toy).findOne({
+    const record: Details | undefined = await Entities.getOne(Toy.toString(), {
       where: { ...conditions }
     });
 

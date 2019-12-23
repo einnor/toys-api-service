@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import { Brand } from '../entity/Brand';
 import { Listing, Details } from '../@types/brands';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
+import { Entities } from './Entities';
 
 export class Brands {
 
@@ -42,9 +43,10 @@ export class Brands {
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
-    const record = await getManager().getRepository(Brand).findOne({
+    const record: Details | undefined = await Entities.getOne(Brand.toString(), {
       where: { ...conditions }
     });
+
     return record;
   }
 
