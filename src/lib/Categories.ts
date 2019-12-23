@@ -51,6 +51,7 @@ export class Categories {
   public static async save({ name }: { name: string}): Promise<Details | undefined> {
 
     const exists = await this.getOne({ name });
+    console.log(exists);
     if (exists) {
       return;
     }

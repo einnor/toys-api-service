@@ -25,6 +25,7 @@ class Categories {
     }
     static async save({ name }) {
         const exists = await this.getOne({ name });
+        console.log(exists);
         if (exists) {
             return;
         }

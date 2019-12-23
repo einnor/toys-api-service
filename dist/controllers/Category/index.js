@@ -22,6 +22,7 @@ class CategoryController {
     ;
     static async save(request, response) {
         const { name } = request.body;
+        console.log(name);
         try {
             const category = await Categories_1.Categories.save({ name });
             return Api_1.Api.success(response, category);

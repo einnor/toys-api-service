@@ -42,6 +42,7 @@ export class CategoryController {
    */
   public static async save (request: Request, response: Response) {
     const { name } = request.body;
+    console.log(name);
 
     try {
       const category: Details | undefined = await Categories.save({ name });
