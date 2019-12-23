@@ -59,7 +59,7 @@ export class Brands {
 
     const brand = new Brand();
     brand.name = name;
-   const record = await getManager().getRepository(Brand).save<Brand>(brand);
+    const record = await Entities.save(Brand.toString(), brand);
 
     return record;
   }

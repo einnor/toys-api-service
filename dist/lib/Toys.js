@@ -45,7 +45,7 @@ class Toys {
         toy.description = description;
         toy.price = price;
         toy.imageUrl = imageUrl;
-        const record = await typeorm_1.getManager().getRepository(Toy_1.Toy).save(toy);
+        const record = await Entities_1.Entities.save(Toy_1.Toy.toString(), toy);
         return record;
     }
 }

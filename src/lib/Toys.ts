@@ -98,7 +98,7 @@ export class Toys {
     toy.price = price;
     toy.imageUrl = imageUrl;
 
-   const record = await getManager().getRepository(Toy).save<Toy>(toy);
+    const record = await Entities.save(Toy.toString(), toy);
 
     return record;
   }

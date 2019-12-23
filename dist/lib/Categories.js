@@ -32,7 +32,7 @@ class Categories {
         }
         const category = new Category_1.Category();
         category.name = name;
-        const record = await typeorm_1.getManager().getRepository(Category_1.Category).save(category);
+        const record = await Entities_1.Entities.save(Category_1.Category.toString(), category);
         return record;
     }
 }

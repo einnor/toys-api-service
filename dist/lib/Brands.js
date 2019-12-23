@@ -31,7 +31,7 @@ class Brands {
         }
         const brand = new Brand_1.Brand();
         brand.name = name;
-        const record = await typeorm_1.getManager().getRepository(Brand_1.Brand).save(brand);
+        const record = await Entities_1.Entities.save(Brand_1.Brand.toString(), brand);
         return record;
     }
 }

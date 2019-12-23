@@ -60,7 +60,7 @@ export class Categories {
 
     const category = new Category();
     category.name = name;
-   const record = await getManager().getRepository(Category).save<Category>(category);
+    const record = await Entities.save(Category.toString(), category);
 
     return record;
   }
