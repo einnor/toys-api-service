@@ -4,7 +4,7 @@ const Brand_1 = require("../controllers/Brand");
 exports.routes = [
     {
         path: '/brands',
-        method: 'GET',
+        method: 'get',
         action: Brand_1.BrandController.getBrandListing,
         cache: true,
     },

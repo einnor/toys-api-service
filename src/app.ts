@@ -1,5 +1,5 @@
 import express, { RequestHandler } from 'express';
-import { createConnections } from 'typeorm';
+import { createConnection } from 'typeorm';
 import consoleStamp from 'console-stamp';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -48,8 +48,8 @@ if (process.env.NODE_ENV !== 'production') {
 // Establish the database connections,
 // then initialize the API...
 export const app = async () =>
-  createConnections()
-    .then((connections) => {
+  createConnection()
+    .then((connection) => {
       // Create a new express application instance
       const router: express.Application = express();
 
@@ -72,7 +72,7 @@ export const app = async () =>
         // This is first in the middleware chain, as it
         // will bypass any further, unnecessary logic.
         if (route.cache === true) {
-          app[route.method](route.path, checkCache);
+          router[route.method](route.path, checkCache);
         }
 
         // See if there's additional info the AppRoute

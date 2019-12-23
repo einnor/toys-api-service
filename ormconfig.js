@@ -22,17 +22,17 @@ module.exports = {
       }
     },
    "entities": [
-      "src/entity/**/*.js"
+      "dist/entity/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.js"
+      "dist/migration/**/*.js"
    ],
    "subscribers": [
-      "src/subscriber/**/*.js"
+      "dist/subscriber/**/*.js"
    ],
    "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+      "entitiesDir": "dist/entity",
+      "migrationsDir": "dist/migration",
+      "subscribersDir": "dist/subscriber"
    }
 }

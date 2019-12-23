@@ -37,8 +37,8 @@ const loggingOptions = [
 if (process.env.NODE_ENV !== 'production') {
     loggingOptions.push('query');
 }
-exports.app = async () => typeorm_1.createConnections()
-    .then((connections) => {
+exports.app = async () => typeorm_1.createConnection()
+    .then((connection) => {
     const router = express_1.default();
     const port = parseInt(process.env.PORT || '8080');
     router.use(express_1.default.json({ limit: '1mb' }));
@@ -46,7 +46,7 @@ exports.app = async () => typeorm_1.createConnections()
     router.use(helmet_1.default());
     routes_1.Routes.forEach((route) => {
         if (route.cache === true) {
-            exports.app[route.method](route.path, CheckCache_1.checkCache);
+            router[route.method](route.path, CheckCache_1.checkCache);
         }
         router[route.method](route.path, (request, response, next) => {
             request.sortableFields = route.sortable || [];
