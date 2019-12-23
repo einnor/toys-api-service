@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const { check } = require('express-validator');
+const express_validator_1 = require("express-validator");
 const Brand_1 = require("../entity/Brand");
 class Brands {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
@@ -36,7 +36,7 @@ class Brands {
 }
 Brands.validators = {
     save: [
-        check('name', 'Invalid brand name').isLength({
+        express_validator_1.check('name', 'Invalid brand name').isLength({
             min: 2,
             max: 50,
         }),

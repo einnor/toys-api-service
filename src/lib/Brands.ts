@@ -1,5 +1,5 @@
 import { getManager } from 'typeorm';
-const { check } = require('express-validator');
+import { check } from 'express-validator';
 import { Brand } from '../entity/Brand';
 import { Listing, Details } from '../@types/brands';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';

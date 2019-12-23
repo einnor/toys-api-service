@@ -36,7 +36,7 @@ class Brands {
 }
 Brands.validators = {
     save: [
-        check('name', 'Invalid name').isLength({
+        check('name', 'Invalid brand name').isLength({
             min: 2,
             max: 50,
         }),
