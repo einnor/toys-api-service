@@ -1,5 +1,5 @@
 import { Request, Response } from 'express-serve-static-core';
-import { validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator';
 import { NextFunction } from 'express';
 import { Api } from '../lib/Api';
 
