@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const { check } = require('express-validator');
-const Brand_1 = require("../entity/Brand");
-class Brands {
+const Category_1 = require("../entity/Category");
+class Categories {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
         const sortColumn = sortField ? sortField : 'createdAt';
-        const queryBuilder = typeorm_1.getManager().createQueryBuilder(Brand_1.Brand, 'brand');
+        const queryBuilder = typeorm_1.getManager().createQueryBuilder(Category_1.Category, 'category');
         let query = queryBuilder
-            .orderBy(`brand.${sortColumn}`, sortOrder);
+            .orderBy(`category.${sortColumn}`, sortOrder);
         query = query.skip(offset).take(perPage);
         const [results, totalResults] = await query.getManyAndCount();
         const pagedListing = {
@@ -18,7 +18,7 @@ class Brands {
         return pagedListing;
     }
     static async getOne(conditions) {
-        const record = await typeorm_1.getManager().getRepository(Brand_1.Brand).findOne({
+        const record = await typeorm_1.getManager().getRepository(Category_1.Category).findOne({
             where: Object.assign({}, conditions)
         });
         return record;
@@ -28,19 +28,19 @@ class Brands {
         if (exists) {
             return;
         }
-        const brand = new Brand_1.Brand();
-        brand.name = name;
-        const record = await typeorm_1.getManager().getRepository(Brand_1.Brand).save(brand);
+        const category = new Category_1.Category();
+        category.name = name;
+        const record = await typeorm_1.getManager().getRepository(Category_1.Category).save(category);
         return record;
     }
 }
-Brands.validators = {
+Categories.validators = {
     save: [
-        check('name', 'Invalid brand name').isLength({
+        check('name', 'Invalid category name').isLength({
             min: 2,
             max: 50,
         }),
     ],
 };
-exports.Brands = Brands;
-//# sourceMappingURL=Brands.js.map
+exports.Categories = Categories;
+//# sourceMappingURL=Categories.js.map

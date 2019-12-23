@@ -36,11 +36,11 @@ class Brands {
 }
 Brands.validators = {
     save: [
-        check('name', 'Invalid brand name').isLength({
+        check('name', 'Invalid name').isLength({
             min: 2,
             max: 50,
         }),
     ],
 };
 exports.Brands = Brands;
-//# sourceMappingURL=Brands.js.map
+//# sourceMappingURL=Brands copy.js.map

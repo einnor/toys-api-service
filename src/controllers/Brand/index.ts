@@ -44,7 +44,7 @@ export class BrandController {
     const { name } = request.body;
 
     try {
-      const brand: Details = await Brands.save({ name });
+      const brand: Details | undefined = await Brands.save({ name });
 
       return Api.success(response, brand);
     } catch (error) {

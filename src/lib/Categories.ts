@@ -1,15 +1,15 @@
 import { getManager } from 'typeorm';
 const { check } = require('express-validator');
-import { Brand } from '../entity/Brand';
-import { Listing, Details } from '../@types/brands';
+import { Category } from '../entity/Category';
+import { Listing, Details } from '../@types/categories';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
 
-export class Brands {
+export class Categories {
 
   public static validators = {
     save: [
       // Name
-      check('name', 'Invalid brand name').isLength({
+      check('name', 'Invalid category name').isLength({
         min: 2,
         max: 50,
       }),
@@ -20,12 +20,12 @@ export class Brands {
 
     const sortColumn: string = sortField ? sortField : 'createdAt';
 
-    // Create a QueryBuilder instance for the brand entity
-    const queryBuilder = getManager().createQueryBuilder<Brand>(Brand, 'brand');
+    // Create a QueryBuilder instance for the category entity
+    const queryBuilder = getManager().createQueryBuilder<Category>(Category, 'category');
 
     // Sort column and sort order
     let query = queryBuilder
-      .orderBy(`brand.${sortColumn}`, sortOrder);
+      .orderBy(`category.${sortColumn}`, sortOrder);
 
     // Lastly, set the pagination conditions
     query = query.skip(offset).take(perPage);
@@ -42,7 +42,7 @@ export class Brands {
   }
 
   public static async getOne(conditions: object): Promise<Details | undefined> {
-    const record = await getManager().getRepository(Brand).findOne({
+    const record = await getManager().getRepository(Category).findOne({
       where: { ...conditions }
     });
     return record;
@@ -55,9 +55,9 @@ export class Brands {
       return;
     }
 
-    const brand = new Brand();
-    brand.name = name;
-   const record = await getManager().getRepository(Brand).save<Brand>(brand);
+    const category = new Category();
+    category.name = name;
+   const record = await getManager().getRepository(Category).save<Category>(category);
 
     return record;
   }
