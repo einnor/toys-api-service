@@ -20,11 +20,28 @@ class ToyController {
         }
     }
     ;
+    static async getOne(request, response) {
+        const { id } = request.params;
+        try {
+            const toy = await Toys_1.Toys.getOne({ id });
+            if (!toy) {
+                return Api_1.Api.notFound(request, response, 'Record not found');
+            }
+            return Api_1.Api.success(response, toy);
+        }
+        catch (error) {
+            return Api_1.Api.internalError(request, response, error);
+        }
+    }
+    ;
     static async save(request, response) {
         const { brandId, categoryId, model, description, price, imageUrl } = request.body;
         try {
-            const brand = await Toys_1.Toys.save({ brandId, categoryId, model, description, price, imageUrl });
-            return Api_1.Api.success(response, brand);
+            const toy = await Toys_1.Toys.save({ brandId, categoryId, model, description, price, imageUrl });
+            if (!toy) {
+                return Api_1.Api.notFound(request, response, 'Records not found');
+            }
+            return Api_1.Api.success(response, toy);
         }
         catch (error) {
             return Api_1.Api.internalError(request, response, error);

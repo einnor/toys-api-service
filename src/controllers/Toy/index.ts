@@ -34,6 +34,30 @@ export class ToyController {
   };
 
   /**
+   * GET
+   * Retrieve a Toy by id
+   *
+   * @param request
+   * @param response
+   */
+  public static async getOne (request: Request, response: Response) {
+    // Param
+    const { id } = request.params;
+
+    try {
+      const toy: Details | undefined = await Toys.getOne({ id });
+
+      if (!toy) {
+        return Api.notFound(request, response, 'Record not found');
+      }
+
+      return Api.success(response, toy);
+    } catch (error) {
+      return Api.internalError(request, response, error);
+    }
+  };
+
+  /**
    * POST
    * Save a toy and return the result object
    *
@@ -44,9 +68,13 @@ export class ToyController {
     const { brandId, categoryId, model, description, price, imageUrl } = request.body;
 
     try {
-      const brand: Details | undefined = await Toys.save({ brandId, categoryId, model, description, price, imageUrl });
+      const toy: Details | undefined = await Toys.save({ brandId, categoryId, model, description, price, imageUrl });
 
-      return Api.success(response, brand);
+      if (!toy) {
+        return Api.notFound(request, response, 'Records not found');
+      }
+
+      return Api.success(response, toy);
     } catch (error) {
       return Api.internalError(request, response, error);
     }

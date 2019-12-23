@@ -10,6 +10,12 @@ export const routes: Route[] = [
     cache: true,
   },
   {
+    path: '/api/v1/toys/:id',
+    method: 'get',
+    action: Controller.getOne,
+    cache: true,
+  },
+  {
     path: '/api/v1/toys',
     method: 'post',
     action: Controller.save,

@@ -10,6 +10,12 @@ exports.routes = [
         cache: true,
     },
     {
+        path: '/api/v1/toys/:id',
+        method: 'get',
+        action: Toy_1.ToyController.getOne,
+        cache: true,
+    },
+    {
         path: '/api/v1/toys',
         method: 'post',
         action: Toy_1.ToyController.save,
