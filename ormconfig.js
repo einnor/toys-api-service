@@ -22,13 +22,13 @@ module.exports = {
       }
     },
    "entities": [
-      "src/entity/**/*.ts"
+      "src/entity/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "src/migration/**/*.js"
    ],
    "subscribers": [
-      "src/subscriber/**/*.ts"
+      "src/subscriber/**/*.js"
    ],
    "cli": {
       "entitiesDir": "src/entity",
