@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ApiError } from './ApiError';
-import {ResourceNotFoundException, UnauthorizedException, BadRequestException} from './exceptions';
+import { ResourceNotFoundException, UnauthorizedException, BadRequestException, ForbiddenException } from './exceptions';
 
 export class Api {
   /**
@@ -200,6 +200,8 @@ export class Api {
         return Api.badRequest(request, response, error);
       case UnauthorizedException:
         return Api.unauthorized(request, response);
+      case ForbiddenException:
+        return Api.forbidden(request, response);
       default:
         return Api.internalError(request, response, error);
     }

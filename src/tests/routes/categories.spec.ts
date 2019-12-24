@@ -8,7 +8,7 @@ testSetup();
 
 let request: supertest.SuperTest<supertest.Test>;
 let app: Application;
-const endpoint = '/api/v1/brands'
+const endpoint = '/api/v1/categories'
 
 beforeAll(async () => {
   app = (await getApp()) as Application;
@@ -19,8 +19,8 @@ afterAll(() => {
   app.removeAllListeners();
 });
 
-describe('Brand Routes', () => {
-  it('should list toy brands', async () => {
+describe('Category Routes', () => {
+  it('should list toy catgories', async () => {
     const response = await request.get(endpoint);
 
     expect(response.status).toEqual(200);

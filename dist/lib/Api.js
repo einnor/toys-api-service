@@ -100,6 +100,8 @@ class Api {
                 return Api.badRequest(request, response, error);
             case exceptions_1.UnauthorizedException:
                 return Api.unauthorized(request, response);
+            case exceptions_1.ForbiddenException:
+                return Api.forbidden(request, response);
             default:
                 return Api.internalError(request, response, error);
         }
