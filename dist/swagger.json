@@ -256,6 +256,54 @@
                     }
                 }
             }
+        },
+        "/toys/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the toy that we want to match",
+                    "type": "string",
+                    "example": "eae16c62-d8fe-4d75-810b-ece8f5593589"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "toy"
+                ],
+                "summary": "Update an existing toy",
+                "description": "",
+                "operationId": "updateToy",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Toy object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ToyCreateOrUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Toy"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
         }
     },
     "definitions": {
