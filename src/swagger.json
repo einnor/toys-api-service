@@ -308,9 +308,31 @@
         "tags": [
           "toy"
         ],
-        "summary": "Toy by ID",
+        "summary": "Get a toy",
         "description": "",
         "operationId": "getToyById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Toy"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "toy"
+        ],
+        "summary": "Delete a toy",
+        "description": "",
+        "operationId": "deleteToy",
         "consumes": [
           "application/json"
         ],
