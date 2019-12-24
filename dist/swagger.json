@@ -219,6 +219,42 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "toy"
+                ],
+                "summary": "Add a new toy",
+                "description": "",
+                "operationId": "addToy",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Toy object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ToyCreateOrUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Toy"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
             }
         }
     },
