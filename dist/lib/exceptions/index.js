@@ -11,4 +11,6 @@ const UnauthorizedException_1 = __importDefault(require("./UnauthorizedException
 exports.UnauthorizedException = UnauthorizedException_1.default;
 const BadRequestException_1 = __importDefault(require("./BadRequestException"));
 exports.BadRequestException = BadRequestException_1.default;
+const ForbiddenException_1 = __importDefault(require("./ForbiddenException"));
+exports.ForbiddenException = ForbiddenException_1.default;
 //# sourceMappingURL=index.js.map

@@ -29,7 +29,7 @@ export class BrandController {
 
       return Api.success(response, listing);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -44,11 +44,11 @@ export class BrandController {
     const { name } = request.body;
 
     try {
-      const brand: Details | undefined = await Brands.save({ name });
+      const brand: Details = await Brands.save({ name });
 
-      return Api.success(response, brand);
+      return Api.successfullyAdded(response, brand);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 }

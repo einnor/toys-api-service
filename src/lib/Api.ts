@@ -1,7 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
 import { ApiError } from './ApiError';
+import {ResourceNotFoundException, UnauthorizedException, BadRequestException} from './exceptions';
 
 export class Api {
+  /**
+   * Return a 401 status for requests that require authorization, but do not
+   * contain a validation Auth Bearer token in the request headers.
+   *
+   * @param request
+   * @param response
+   */
+  public static unauthorized(request: Request, response: Response): Response {
+    response.statusCode = 401;
+    return response.json();
+  }
+
+  /**
+   * Return a 403 status for requests that attempt to do an action that is
+   * forbidden
+   *
+   * @param request
+   * @param response
+   */
+  public static forbidden(request: Request, response: Response): Response {
+    response.statusCode = 403;
+    return response.json();
+  }
+
   /**
    * Return a 404 status when a the requested route is not defined, or the route
    * params refer to an Entity which does not exist.
@@ -166,4 +191,17 @@ export class Api {
     // Otherwise, return 500 (internal server error)
     return Api.internalError(request, response, errorMessage);
   }
+
+  public static handleExceptions (request: Request, response: Response, error) {
+    switch (error.constructor) {
+      case ResourceNotFoundException:
+        return Api.notFound(request, response, error);
+      case BadRequestException:
+        return Api.badRequest(request, response, error);
+      case UnauthorizedException:
+        return Api.unauthorized(request, response);
+      default:
+        return Api.internalError(request, response, error);
+    }
+  };
 }

@@ -6,6 +6,7 @@ import { GetRequestOptions } from '../@types/api/GetRequestOptions';
 import { Brands } from './Brands';
 import { Categories } from './Categories';
 import { Entities } from './Entities';
+import { ForbiddenException, ResourceNotFoundException } from './exceptions';
 
 export class Toys {
 
@@ -68,6 +69,16 @@ export class Toys {
     return pagedListing;
   }
 
+  public static async getById({ id }: { id: string }): Promise<Details> {
+    const record = await this.getOne({ id });
+
+    if (!record) {
+      throw new ResourceNotFoundException();
+    }
+
+    return record;
+  }
+
   public static async getOne(conditions: object): Promise<Details | undefined> {
     const record: Details | undefined = await Entities.getOne(Toy, {
       where: { ...conditions }
@@ -76,18 +87,18 @@ export class Toys {
     return record;
   }
 
-  public static async save({ brandId, categoryId, model, description, price, imageUrl }): Promise<Details | undefined> {
+  public static async save({ brandId, categoryId, model, description, price, imageUrl }): Promise<Details> {
 
     const exists = await this.getOne({ brandId, categoryId, model });
     if (exists) {
-      return;
+      throw new ForbiddenException();
     }
 
     const brand = await Brands.getOne({ id: brandId });
     const category = await Categories.getOne({ id: categoryId });
 
     if (!brand || !category) {
-      return;
+      throw new ForbiddenException();
     }
 
     const toy = new Toy();
@@ -103,18 +114,18 @@ export class Toys {
     return record;
   }
 
-  public static async update(id: string, { brandId, categoryId, model, description, price, imageUrl }): Promise<Details | undefined> {
+  public static async update(id: string, { brandId, categoryId, model, description, price, imageUrl }): Promise<Details> {
 
     const toy = await this.getOne({ id });
     if (!toy) {
-      return;
+      throw new ResourceNotFoundException();
     }
 
     const brand = await Brands.getOne({ id: brandId });
     const category = await Categories.getOne({ id: categoryId });
 
     if (!brand || !category) {
-      return;
+      throw new ForbiddenException();
     }
 
     toy.brand = brand;
@@ -129,11 +140,11 @@ export class Toys {
     return record;
   }
 
-  public static async remove({ id }): Promise<Details | undefined> {
+  public static async remove({ id }): Promise<Details> {
 
     const toy = await this.getOne({ id });
     if (!toy) {
-      return;
+      throw new ResourceNotFoundException();
     }
 
     await Entities.remove(Toy, toy);

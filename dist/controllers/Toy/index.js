@@ -16,21 +16,21 @@ class ToyController {
             return Api_1.Api.success(response, listing);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
     static async getOne(request, response) {
         const { id } = request.params;
         try {
-            const toy = await Toys_1.Toys.getOne({ id });
+            const toy = await Toys_1.Toys.getById({ id });
             if (!toy) {
                 return Api_1.Api.notFound(request, response, 'Record not found');
             }
             return Api_1.Api.success(response, toy);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
@@ -41,10 +41,10 @@ class ToyController {
             if (!toy) {
                 return Api_1.Api.notFound(request, response, 'Records not found');
             }
-            return Api_1.Api.success(response, toy);
+            return Api_1.Api.successfullyAdded(response, toy);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
@@ -56,10 +56,10 @@ class ToyController {
             if (!toy) {
                 return Api_1.Api.notFound(request, response, 'Records not found');
             }
-            return Api_1.Api.success(response, toy);
+            return Api_1.Api.successfullyAdded(response, toy);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
@@ -73,7 +73,7 @@ class ToyController {
             return Api_1.Api.success(response, toy);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;

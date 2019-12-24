@@ -16,7 +16,7 @@ class BrandController {
             return Api_1.Api.success(response, listing);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
@@ -24,10 +24,10 @@ class BrandController {
         const { name } = request.body;
         try {
             const brand = await Brands_1.Brands.save({ name });
-            return Api_1.Api.success(response, brand);
+            return Api_1.Api.successfullyAdded(response, brand);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;

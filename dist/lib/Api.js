@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const exceptions_1 = require("./exceptions");
 class Api {
+    static unauthorized(request, response) {
+        response.statusCode = 401;
+        return response.json();
+    }
+    static forbidden(request, response) {
+        response.statusCode = 403;
+        return response.json();
+    }
     static notFound(request, response, responseData, shouldAlert = true) {
         response.statusCode = 404;
         console.error(`404 Status:\n${responseData || 'no error data'}`);
@@ -83,6 +92,19 @@ class Api {
         }
         return Api.internalError(request, response, errorMessage);
     }
+    static handleExceptions(request, response, error) {
+        switch (error.constructor) {
+            case exceptions_1.ResourceNotFoundException:
+                return Api.notFound(request, response, error);
+            case exceptions_1.BadRequestException:
+                return Api.badRequest(request, response, error);
+            case exceptions_1.UnauthorizedException:
+                return Api.unauthorized(request, response);
+            default:
+                return Api.internalError(request, response, error);
+        }
+    }
+    ;
 }
 exports.Api = Api;
 //# sourceMappingURL=Api.js.map

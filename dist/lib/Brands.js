@@ -4,6 +4,7 @@ const typeorm_1 = require("typeorm");
 const express_validator_1 = require("express-validator");
 const Brand_1 = require("../entity/Brand");
 const Entities_1 = require("./Entities");
+const exceptions_1 = require("./exceptions");
 class Brands {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
         const sortColumn = sortField ? sortField : 'createdAt';
@@ -27,7 +28,7 @@ class Brands {
     static async save({ name }) {
         const exists = await this.getOne({ name });
         if (exists) {
-            return;
+            throw new exceptions_1.ForbiddenException();
         }
         const brand = new Brand_1.Brand();
         brand.name = name;

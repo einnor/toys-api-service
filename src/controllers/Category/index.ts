@@ -29,7 +29,7 @@ export class CategoryController {
 
       return Api.success(response, listing);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -42,14 +42,13 @@ export class CategoryController {
    */
   public static async save (request: Request, response: Response) {
     const { name } = request.body;
-    console.log(name);
 
     try {
-      const category: Details | undefined = await Categories.save({ name });
+      const category: Details = await Categories.save({ name });
 
-      return Api.success(response, category);
+      return Api.successfullyAdded(response, category);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 }

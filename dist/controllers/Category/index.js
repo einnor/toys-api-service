@@ -16,19 +16,18 @@ class CategoryController {
             return Api_1.Api.success(response, listing);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;
     static async save(request, response) {
         const { name } = request.body;
-        console.log(name);
         try {
             const category = await Categories_1.Categories.save({ name });
-            return Api_1.Api.success(response, category);
+            return Api_1.Api.successfullyAdded(response, category);
         }
         catch (error) {
-            return Api_1.Api.internalError(request, response, error);
+            return Api_1.Api.handleExceptions(request, response, error);
         }
     }
     ;

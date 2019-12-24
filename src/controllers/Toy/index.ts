@@ -29,7 +29,7 @@ export class ToyController {
 
       return Api.success(response, listing);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -45,7 +45,7 @@ export class ToyController {
     const { id } = request.params;
 
     try {
-      const toy: Details | undefined = await Toys.getOne({ id });
+      const toy: Details = await Toys.getById({ id });
 
       if (!toy) {
         return Api.notFound(request, response, 'Record not found');
@@ -53,7 +53,7 @@ export class ToyController {
 
       return Api.success(response, toy);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -68,15 +68,15 @@ export class ToyController {
     const { brandId, categoryId, model, description, price, imageUrl } = request.body;
 
     try {
-      const toy: Details | undefined = await Toys.save({ brandId, categoryId, model, description, price, imageUrl });
+      const toy: Details = await Toys.save({ brandId, categoryId, model, description, price, imageUrl });
 
       if (!toy) {
         return Api.notFound(request, response, 'Records not found');
       }
 
-      return Api.success(response, toy);
+      return Api.successfullyAdded(response, toy);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -92,15 +92,15 @@ export class ToyController {
     const { brandId, categoryId, model, description, price, imageUrl } = request.body;
 
     try {
-      const toy: Details | undefined = await Toys.update(id, { brandId, categoryId, model, description, price, imageUrl });
+      const toy: Details = await Toys.update(id, { brandId, categoryId, model, description, price, imageUrl });
 
       if (!toy) {
         return Api.notFound(request, response, 'Records not found');
       }
 
-      return Api.success(response, toy);
+      return Api.successfullyAdded(response, toy);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 
@@ -123,7 +123,7 @@ export class ToyController {
 
       return Api.success(response, toy);
     } catch (error) {
-      return Api.internalError(request, response, error);
+      return Api.handleExceptions(request, response, error);
     }
   };
 }

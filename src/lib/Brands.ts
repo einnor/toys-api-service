@@ -4,6 +4,7 @@ import { Brand } from '../entity/Brand';
 import { Listing, Details } from '../@types/brands';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
 import { Entities } from './Entities';
+import { ForbiddenException } from './exceptions';
 
 export class Brands {
 
@@ -50,11 +51,11 @@ export class Brands {
     return record;
   }
 
-  public static async save({ name }: { name: string}): Promise<Details | undefined> {
+  public static async save({ name }: { name: string}): Promise<Details> {
 
     const exists = await this.getOne({ name });
     if (exists) {
-      return;
+      throw new ForbiddenException();
     }
 
     const brand = new Brand();

@@ -4,6 +4,7 @@ import { Category } from '../entity/Category';
 import { Listing, Details } from '../@types/categories';
 import { GetRequestOptions } from '../@types/api/GetRequestOptions';
 import { Entities } from './Entities';
+import { ForbiddenException } from './exceptions';
 
 export class Categories {
 
@@ -50,12 +51,11 @@ export class Categories {
     return record;
   }
 
-  public static async save({ name }: { name: string}): Promise<Details | undefined> {
+  public static async save({ name }: { name: string}): Promise<Details> {
 
     const exists = await this.getOne({ name });
-    console.log(exists);
     if (exists) {
-      return;
+      throw new ForbiddenException();
     }
 
     const category = new Category();

@@ -6,6 +6,7 @@ const Toy_1 = require("../entity/Toy");
 const Brands_1 = require("./Brands");
 const Categories_1 = require("./Categories");
 const Entities_1 = require("./Entities");
+const exceptions_1 = require("./exceptions");
 class Toys {
     static async getListing({ perPage, offset, sortField, sortOrder }) {
         const sortColumn = sortField ? sortField : 'createdAt';
@@ -22,6 +23,13 @@ class Toys {
         };
         return pagedListing;
     }
+    static async getById({ id }) {
+        const record = await this.getOne({ id });
+        if (!record) {
+            throw new exceptions_1.ResourceNotFoundException();
+        }
+        return record;
+    }
     static async getOne(conditions) {
         const record = await Entities_1.Entities.getOne(Toy_1.Toy, {
             where: Object.assign({}, conditions)
@@ -31,12 +39,12 @@ class Toys {
     static async save({ brandId, categoryId, model, description, price, imageUrl }) {
         const exists = await this.getOne({ brandId, categoryId, model });
         if (exists) {
-            return;
+            throw new exceptions_1.ForbiddenException();
         }
         const brand = await Brands_1.Brands.getOne({ id: brandId });
         const category = await Categories_1.Categories.getOne({ id: categoryId });
         if (!brand || !category) {
-            return;
+            throw new exceptions_1.ForbiddenException();
         }
         const toy = new Toy_1.Toy();
         toy.brand = brand;
@@ -51,12 +59,12 @@ class Toys {
     static async update(id, { brandId, categoryId, model, description, price, imageUrl }) {
         const toy = await this.getOne({ id });
         if (!toy) {
-            return;
+            throw new exceptions_1.ResourceNotFoundException();
         }
         const brand = await Brands_1.Brands.getOne({ id: brandId });
         const category = await Categories_1.Categories.getOne({ id: categoryId });
         if (!brand || !category) {
-            return;
+            throw new exceptions_1.ForbiddenException();
         }
         toy.brand = brand;
         toy.category = category;
@@ -70,7 +78,7 @@ class Toys {
     static async remove({ id }) {
         const toy = await this.getOne({ id });
         if (!toy) {
-            return;
+            throw new exceptions_1.ResourceNotFoundException();
         }
         await Entities_1.Entities.remove(Toy_1.Toy, toy);
         return toy;

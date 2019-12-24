@@ -1,0 +1,1 @@
+{"version":3,"file":"ForbiddenException.js","sourceRoot":"","sources":["../../../src/lib/exceptions/ForbiddenException.ts"],"names":[],"mappings":";;;;;AAAA,oEAA4C;AAE5C,MAAM,kBAAmB,SAAQ,uBAAa;IAC5C;QACE,KAAK,CAAC,GAAG,EAAE,WAAW,CAAC,CAAC;IAC1B,CAAC;CACF;AAED,kBAAe,kBAAkB,CAAC"}
