@@ -69,6 +69,9 @@
                         "schema": {
                             "$ref": "#/definitions/Brands"
                         }
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
@@ -105,6 +108,12 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -143,6 +152,9 @@
                         "schema": {
                             "$ref": "#/definitions/Categories"
                         }
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
@@ -179,6 +191,12 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -217,6 +235,9 @@
                         "schema": {
                             "$ref": "#/definitions/Toys"
                         }
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
@@ -253,6 +274,12 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -301,6 +328,12 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
@@ -323,6 +356,15 @@
                         "schema": {
                             "$ref": "#/definitions/Toy"
                         }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
