@@ -19,5 +19,5 @@ export class Category {
     updatedAt: Date;
 
     @OneToMany(type => Toy, toy => toy.category)
-    toys: Toy[];
+    toys?: Toy[];
 }
