@@ -20,11 +20,17 @@ afterAll(() => {
 });
 
 describe('Brand Routes', () => {
-  it('should list toy brands ', async () => {
+  it('should list toy brands', async () => {
     const response = await request.get(endpoint);
 
     expect(response.status).toEqual(200);
     expect(response.body.total).toBeDefined();
     expect(response.body.pageData).toBeDefined();
+  });
+
+  it('should return 400 when provided with invalid name', async () => {
+    const response = await request.post(endpoint).send({ name: '' });
+
+    expect(response.status).toEqual(400);
   });
 });
