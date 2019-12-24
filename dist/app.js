@@ -2,6 +2,13 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
@@ -9,8 +16,8 @@ const console_stamp_1 = __importDefault(require("console-stamp"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 require("reflect-metadata");
-const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swaggerDocument = __importStar(require("./swagger.json"));
 const CheckCache_1 = require("./middlewares/CheckCache");
 const ValidateInput_1 = require("./middlewares/ValidateInput");
 const ParseRequest_1 = require("./middlewares/ParseRequest");
@@ -39,32 +46,6 @@ const loggingOptions = [
 if (process.env.NODE_ENV !== 'production') {
     loggingOptions.push('query');
 }
-const options = {
-    swaggerDefinition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'Toys API Service',
-            version: '1.0.0',
-            description: 'Documentation for the Toys API Service',
-            license: {
-                name: 'MIT',
-                url: 'https://choosealicense.com/licenses/mit/'
-            },
-            contact: {
-                name: 'Swagger',
-                url: 'https://swagger.io',
-                email: 'ronnienyaga@gmail.com'
-            }
-        },
-        servers: [
-            {
-                url: "http://localhost:8080/api/v1"
-            }
-        ]
-    },
-    apis: []
-};
-const specs = swagger_jsdoc_1.default(options);
 exports.app = async () => typeorm_1.createConnection()
     .then((connection) => {
     const router = express_1.default();
@@ -72,8 +53,7 @@ exports.app = async () => typeorm_1.createConnection()
     router.use(express_1.default.json({ limit: '1mb' }));
     router.use(cors_1.default());
     router.use(helmet_1.default());
-    router.use('/api/v1/api-doc', swagger_ui_express_1.default.serve);
-    router.get('/api/v1/api-doc', swagger_ui_express_1.default.setup(specs, { explorer: true }));
+    router.use('/api/v1/api-doc', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
     routes_1.Routes.forEach((route) => {
         if (route.cache === true) {
             router[route.method](route.path, CheckCache_1.checkCache);

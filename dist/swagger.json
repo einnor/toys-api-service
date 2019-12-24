@@ -1,0 +1,115 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API Documentation for the Toys API Service.",
+        "version": "1.0.0",
+        "title": "Toys API Service",
+        "termsOfService": "#",
+        "contact": {
+            "name": "Ronnie Nyaga",
+            "email": "ronnienyaga@gmail.com",
+            "url": "https://github.com/einnor/toys-api-service"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "toys",
+            "description": "Toys"
+        },
+        {
+            "name": "brands",
+            "description": "Toy brands"
+        },
+        {
+            "name": "categories",
+            "description": "Toy categories"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/brands": {
+            "post": {
+                "tags": [
+                    "brand"
+                ],
+                "summary": "Add a new toy brand",
+                "description": "",
+                "operationId": "addBrand",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "name",
+                        "description": "Name of the brand",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BrandCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Brand"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Brand": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "468d4f3c-f4cc-410c-88d1-9ff150b8e397"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Hornby"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "example": "2019-12-23T11:27:50.984Z"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "example": "2019-12-23T11:27:50.984Z"
+                }
+            }
+        },
+        "BrandCreate": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Hornby"
+                }
+            }
+        }
+    }
+}
