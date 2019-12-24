@@ -8,4 +8,4 @@ Steps to run this project:
 4. Update the environment variables in the `.env` file
 5. Run `yarn`
 6. Run `yarn start`
-7. Run `localhost:8080/api-doc` to view documentation of APIs
+7. Browse to `localhost:8080/api/v1/api-doc` to view documentation of APIs
