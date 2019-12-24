@@ -116,7 +116,7 @@
                 ],
                 "summary": "List toy categories",
                 "description": "",
-                "operationId": "listCategoriess",
+                "operationId": "listCategories",
                 "consumes": [
                     "application/json"
                 ],
@@ -179,6 +179,44 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/toys": {
+            "get": {
+                "tags": [
+                    "toy"
+                ],
+                "summary": "List toys",
+                "description": "",
+                "operationId": "listToys",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "perPage",
+                        "description": "Pagination perPage",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Pagination offset",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Toys"
+                        }
                     }
                 }
             }
