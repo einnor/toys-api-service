@@ -1,0 +1,1 @@
+{"version":3,"file":"UnauthorizedException.js","sourceRoot":"","sources":["../../../src/lib/exceptions/UnauthorizedException.ts"],"names":[],"mappings":";;;;;AAAA,oEAA4C;AAE5C,MAAM,qBAAsB,SAAQ,uBAAa;IAC/C;QACE,KAAK,CAAC,GAAG,EAAE,sBAAsB,CAAC,CAAC;IACrC,CAAC;CACF;AAED,kBAAe,qBAAqB,CAAC"}
