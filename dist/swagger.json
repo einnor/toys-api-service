@@ -36,6 +36,42 @@
     ],
     "paths": {
         "/brands": {
+            "get": {
+                "tags": [
+                    "brand"
+                ],
+                "summary": "List toy brands",
+                "description": "",
+                "operationId": "listBrands",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "perPage",
+                        "description": "Pagination perPage",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Pagination offset",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Brands"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "brand"
@@ -96,6 +132,21 @@
                 "updatedAt": {
                     "type": "string",
                     "example": "2019-12-23T11:27:50.984Z"
+                }
+            }
+        },
+        "Brands": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "number",
+                    "example": 16
+                },
+                "pageData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Brand"
+                    }
                 }
             }
         },
